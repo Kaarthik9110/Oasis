@@ -1,0 +1,64 @@
+import java.util.*;
+import java.util.Scanner;
+
+public class Guessgame {
+    static int guess;
+    static int number;
+    static int point = 100;
+    static int attempt = 0;
+
+    public static void Guessgame() {
+        Scanner s = new Scanner(System.in);
+        number = 1 + (int) (100 * Math.random());
+        int k = 5;
+        int i;
+        System.out.println(
+                "NUMBER GUESSING GAME RULES:\n 1-THE NUMBER IS CHOOSEN BETWEEN 1 TO 100\n 2-TOTAL NUMBER OF ATTEMPTS IS FIVE/5");
+        for (i = 1; i <= k; i++) {
+            System.out.println("ENTER THE GUESS NUMBER:");
+            guess = s.nextInt();
+            if (number == guess) {
+                System.out.println("CONGRATULATIONS!" + "You Guessed the number.");
+                rounds();
+                break;
+            } else if (number > guess && i != k + 1) {
+                System.out.println("THE NUMBER IS" + "GREATER THAN" + guess);
+                point -= 2 * i;
+                attempt++;
+            } else if (number < guess && i != k + 1) {
+                System.out.println("THE NUMBER IS " + "LESS THAN" + guess);
+                point -= 2 * i;
+                attempt++;
+
+            }
+        }
+        if (i == k + 1) {
+            System.out.println("YOU HAVE CROSSED YOUR LIMIT:");
+            System.out.println("THE NUMBER WAS" + number);
+            rounds();
+        }
+    }
+
+    public static void rounds() {
+        System.out.println("DO YOU  PLAY ONE MORE ROUND \n ENTER 1-YES\n ENTER 2-NO");
+        Scanner s = new Scanner(System.in);
+        int a = s.nextInt();
+        if (a == 1) {
+            Guessgame();
+
+        } else {
+            System.out.println("PLAY NEXT TIME THANKS FOR PLAYING!");
+            if (number == guess) {
+                System.out.println("TOTAL ATTEMPTS:" + attempt);
+            }
+            System.out.println("TOTAL SCORE IS:" + point);
+        }
+    }
+
+    public static void main(String args[]) {
+        System.out.println("NAME:NUMBER GUESSING GAME");
+        Guessgame();
+
+    }
+
+}
